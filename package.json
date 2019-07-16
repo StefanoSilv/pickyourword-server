@@ -1,0 +1,16 @@
+{
+  "name": "pickyourword-server",
+  "version": "1.0.0",
+  "description": "Backend of the game pickyourword",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Stefano Silvestrini",
+  "license": "ISC",
+  "keywords": [
+    "Backend",
+    "game",
+    "pickyourword"
+  ]
+}
