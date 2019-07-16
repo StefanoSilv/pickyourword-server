@@ -12,6 +12,9 @@ app.use(bodyParser.json())
 
 app.use(cors({allowHeaders: true}))
 
+//Request the database to connect it
+require('./db.js')
+
 //Api
 
 
