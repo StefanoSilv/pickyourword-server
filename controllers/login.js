@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 
 module.exports = (req, res) => {
 	// 1. Check if email exists in db
-	db_user.findOne({email: req.body.email}).then((user) => {
+	db_user.findOne({email: req.body.email}).then( (user) => {
 		if (user) {
 			// 2. If email found, match passwords
 			bcrypt.compare(req.body.password, user.password, (err, match) => {
