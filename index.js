@@ -16,6 +16,13 @@ app.use(cors({allowHeaders: true}))
 require('./db.js')
 
 //Api
+
+//User
+app.get('/api/users', require('./controllers/get_users'))
+
+//Get logged user
+app.get('/api/me', require('./controllers/get_me'))
+
 //Signup
 app.post('/api/signup', require('./controllers/signup'))
 
