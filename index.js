@@ -20,6 +20,9 @@ require('./db.js')
 //User
 app.get('/api/users', require('./controllers/get_users'))
 
+//Question
+app.get(`${endpoint}`,require('.controller/get_question'))
+
 //Get logged user
 app.get('/api/me', require('./controllers/get_me'))
 
