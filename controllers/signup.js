@@ -25,7 +25,6 @@ module.exports = (req, res) => {
 									message: 'You are signed up',
 									token: token
 								})
-								console.log('res', res);
 							}).catch((err) => {
 								res.send(err)
 							})

@@ -20,8 +20,10 @@ require('./db.js')
 //User
 app.get('/api/users', require('./controllers/get_users'))
 
-//Question
-app.get(`${endpoint}`,require('.controller/get_question'))
+//checkQuestion and Answer
+app.post('/api/checkAnswer', require('./controllers/post_checkAnswer'))
+app.get('/api/checkAnswer', require('./controllers/get_checkAnswer'))
+app.patch('/api/checkAnswer', require('./controllers/patch_checkAnswer'))
 
 //Get logged user
 app.get('/api/me', require('./controllers/get_me'))
