@@ -1,4 +1,5 @@
 const db = require('../db')
+const mongoose = require('mongoose')
 
 const db_user = db.model('user', {
 	name: {
@@ -30,8 +31,8 @@ const db_user = db.model('user', {
 		default:0
 	},
 	trophy: {
-		type: Array,
-		default: ['logged_user']
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'trophy'
 	},
 	iscription_date:{
 		type: Date,
