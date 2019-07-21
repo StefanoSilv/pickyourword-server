@@ -1,7 +1,7 @@
 const db = require('../db')
 const mongoose = require('mongoose')
 
-const db_user = db.model('user', {
+const db_user = db.model('users', {
 	name: {
 		type: String,
 		required: [true, 'User Name is required']
@@ -31,8 +31,10 @@ const db_user = db.model('user', {
 		default:0
 	},
 	trophy: {
-		type: mongoose.Schema.Types.ObjectId,
-		ref: 'trophy'
+		// type: mongoose.Schema.Types.ObjectId,
+		// ref: 'trophy',
+		type:String,
+		default: 'beginner'
 	},
 	iscription_date:{
 		type: Date,
