@@ -5,7 +5,6 @@ module.exports = (req, res) =>{
 	let token = req.headers.authorization.split(' ')[1]
 	jwt.verify(token, process.env.SECRET, (err, decoded) => {
 		if (decoded) {
-			console.log('decoded' , decoded.trophy);
 			let trophy_id = decoded.trophy
 			//They must be turned into element of an array and push into it
 			if(decoded.points > 50 ){

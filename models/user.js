@@ -23,8 +23,8 @@ const db_user = db.model('users', {
 		default:0
 	},
 	level: {
-		type: String,
-		default:'beginner'
+		type: Number,
+		default: 1
 	},
 	rounds: {
 		type: Number,

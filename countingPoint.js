@@ -1,9 +1,7 @@
 answer = () => {
 	//must return true if the user gave an answer
 }
-timeOut = () => {
-	//must return true if time did not expired, otherwise false
-}
+
 
 let streak = 0
 let points_added = 0
