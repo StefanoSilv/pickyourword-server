@@ -25,8 +25,6 @@ app.get('/api/trophies', require('./controllers/get_trophies'))
 
 //checkQuestion and Answer
 app.post('/api/checkAnswer', require('./controllers/post_checkAnswer'))
-app.get('/api/checkAnswer', require('./controllers/get_checkAnswer'))
-app.patch('/api/checkAnswer', require('./controllers/patch_checkAnswer'))
 
 //Get logged user
 app.get('/api/me', require('./controllers/get_me'))

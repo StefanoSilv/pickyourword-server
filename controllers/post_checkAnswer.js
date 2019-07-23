@@ -12,7 +12,6 @@ module.exports = (req, res) => {
 			return element === answer
 			console.log(element);
 		})
-		let rounds = 0
 		//streak is working
 		let streak = req.body.streak
 		//points added is working
@@ -24,13 +23,13 @@ module.exports = (req, res) => {
 				if(decoded) {
 					// find user
 					db_user.findById(decoded._id).then((user) => {
-						rounds = user.rounds
-						if (rounds < 2000){
+						if (user.rounds < 2000){
+							user.rounds++
 							//It is working until here
 							if(correct_answer) {
 								//Working in this case
-								user.points += points_added //Working
 								streak++ //Working
+								user.points += points_added //Working
 							} else {
 								//Working in this case
 								//The points can't be negative
@@ -44,7 +43,6 @@ module.exports = (req, res) => {
 							}
 							// Update user
 							db_user.findByIdAndUpdate(decoded._id, user, {new: true}).then( (u) => {
-								console.log(u);
 								res.json(u)
 							})
 						}else{
@@ -57,18 +55,17 @@ module.exports = (req, res) => {
 			})
 		}else{
 			//If there is no token
-			rounds = 0
+			let rounds = 0
 			streak = 0
 			if (rounds<20){
+				rounds++
 				if(correct_answer) {
 					user.points += points_added
 					streak++
-					rounds++
 				} else {
 					if(user.points>0){
 						user.points -= 1
 						streak = 0
-						rounds++
 					}else{
 						user.points=0
 						streak = 0

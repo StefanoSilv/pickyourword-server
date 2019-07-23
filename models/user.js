@@ -22,19 +22,9 @@ const db_user = db.model('users', {
 		type: Number,
 		default:0
 	},
-	level: {
-		type: Number,
-		default: 1
-	},
 	rounds: {
 		type: Number,
 		default:0
-	},
-	trophy: {
-		// type: mongoose.Schema.Types.ObjectId,
-		// ref: 'trophy',
-		type:String,
-		default: 'beginner'
 	},
 	iscription_date:{
 		type: Date,
