@@ -8,6 +8,10 @@ const db_guest = db.model('guest', {
 	rounds: {
 		type: Number,
 		default: 0
+	},
+	streak: {
+		type: Number,
+		default: 0
 	}
 })
 

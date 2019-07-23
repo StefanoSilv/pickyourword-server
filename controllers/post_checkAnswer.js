@@ -55,26 +55,34 @@ module.exports = (req, res) => {
 			})
 		}else{
 			//If there is no token
-			let rounds = 0
-			streak = 0
-			if (rounds<20){
-				rounds++
-				if(correct_answer) {
-					user.points += points_added
-					streak++
-				} else {
-					if(user.points>0){
-						user.points -= 1
-						streak = 0
-					}else{
-						user.points=0
-						streak = 0
-						rounds++
+			db_guest.create({
+				rounds: 0,
+				points: 0,
+				streak: 0
+			}).then( (user) => {
+				if (user.rounds < 10){
+					user.rounds++
+					if(correct_answer) {
+						user.points += points_added
+						user.streak++
+					} else {
+						if(user.points > 0){
+							user.points -= 1
+							user.streak = 0
+						}else{
+							user.points = 0
+							user.streak = 0
+						}
 					}
+					db_guest.findByIdAndUpdate(user._id, user, { new: true }).then( (u) =>{
+						res.json(u)
+					})
+				}else{
+					//Redirection to signup
 				}
-			}else{
-				//Redirection to signup
-			}
+			}).catch( (err) => {
+				console.log(err);
+			})
 		}
 	}).catch( (err) => {
 		console.log(err);
