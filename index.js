@@ -20,9 +20,6 @@ require('./db.js')
 //User
 app.get('/api/users', require('./controllers/get_users'))
 
-//Trophies
-app.get('/api/trophies', require('./controllers/get_trophies'))
-
 //checkQuestion and Answer
 app.post('/api/checkAnswer', require('./controllers/post_checkAnswer'))
 

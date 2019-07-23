@@ -16,7 +16,7 @@ const db_user = db.model('users', {
 	},
 	user_type: {
 		type: String,
-		default:'normal'
+		default:'basic'
 	},
 	points: {
 		type: Number,
