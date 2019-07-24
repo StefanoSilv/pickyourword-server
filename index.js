@@ -21,7 +21,10 @@ require('./db.js')
 app.get('/api/users', require('./controllers/get_users'))
 
 //checkQuestion and Answer
-app.post('/api/checkAnswer', require('./controllers/post_checkAnswer'))
+app.post('/api/checkAnswer', require('./controllers/checkAnswer'))
+
+//To remove a point
+app.post('/api/removePoint', require('./controllers/removePoint'))
 
 //Get logged user
 app.get('/api/me', require('./controllers/get_me'))

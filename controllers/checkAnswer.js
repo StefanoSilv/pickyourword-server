@@ -13,10 +13,9 @@ module.exports = (req, res) => {
 			return element === answer
 			console.log(element);
 		})
-		//streak is working
-		let streak = req.body.streak
+
 		//points added is working
-		let points_added = streak^2
+		let points_added = 0
 		let token = req.headers.authorization.split(' ')[1]
 		if (token) {
 			// verify
@@ -29,25 +28,23 @@ module.exports = (req, res) => {
 							//It is working until here
 							if(correct_answer) {
 								//Working in this case
-								streak++ //Working
+								user.streak++ //Working
+								points_added = 2 * user.streak
 								user.points += points_added //Working
 							} else {
 								//Working in this case
 								//The points can't be negative
 								if(user.points>0){
 									user.points -= 1 //working
-									streak = 0 //working
+									user.streak = 0 //working
 								}else{
 									user.points=0
-									streak = 0
+									user.streak = 0
 								}
 							}
 							// Update user
-							db_user.findByIdAndUpdate(decoded._id, user, {new: true}).then( (u) => {
-								console.log(streak);
-								u.streak = streak
-								console.log(u.streak);
-								console.log(u);
+							db_user.findByIdAndUpdate(decoded._id, user, {new: true}).then( (u_db) => {
+								let u = u_db.toObject()
 								res.json( u )
 							})
 						}else{
@@ -63,13 +60,14 @@ module.exports = (req, res) => {
 			db_guest.create({
 				rounds: 0,
 				points: 0,
-				streak: 0
+				streak:0
 			}).then( (user) => {
 				if (user.rounds < 10){
 					user.rounds++
 					if(correct_answer) {
-						user.points += points_added
 						user.streak++
+						points_added = 2 * user.streak
+						user.points += points_added
 					} else {
 						if(user.points > 0){
 							user.points -= 1
@@ -79,8 +77,9 @@ module.exports = (req, res) => {
 							user.streak = 0
 						}
 					}
-					db_guest.findByIdAndUpdate(user._id, user, { new: true }).then( (u) =>{
-						res.json(u)
+					db_guest.findByIdAndUpdate(user._id, user, { new: true }).then( (u_db) =>{
+						let u = u_db.toObject()
+						res.json( u )
 					})
 				}else{
 					window.location.href = `${process.env.REACT_URL}signup`
