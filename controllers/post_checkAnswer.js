@@ -1,13 +1,14 @@
 const db_user = require('../models/user')
 const jwt = require('jsonwebtoken')
 const axios = require('axios')
+require('dotenv').config()
 
 module.exports = (req, res) => {
-	axios.get(`https://api.datamuse.com/words${req.body.endpoint}`).then((res) => {
+	axios.get(`https://api.datamuse.com/words${req.body.endpoint}`).then((answers) => {
 		//Answer checked and working
 		let answer = req.body.answer.toLowerCase()
 
-		let correct_answers = res.data.map( (c) => c.word )
+		let correct_answers = answers.data.map( (c) => c.word )
 		let correct_answer = correct_answers.find( (element) => {
 			return element === answer
 			console.log(element);
@@ -43,10 +44,14 @@ module.exports = (req, res) => {
 							}
 							// Update user
 							db_user.findByIdAndUpdate(decoded._id, user, {new: true}).then( (u) => {
-								res.json(u)
+								console.log(streak);
+								u.streak = streak
+								console.log(u.streak);
+								console.log(u);
+								res.json( u )
 							})
 						}else{
-							//Redirection to premium account
+							window.location.href = `${process.env.REACT_URL}pay`
 						}
 					}).catch( (err) =>{
 						console.log(err);
@@ -78,7 +83,7 @@ module.exports = (req, res) => {
 						res.json(u)
 					})
 				}else{
-					//Redirection to signup
+					window.location.href = `${process.env.REACT_URL}signup`
 				}
 			}).catch( (err) => {
 				console.log(err);
