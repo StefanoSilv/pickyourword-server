@@ -26,6 +26,9 @@ app.post('/api/checkAnswer', require('./controllers/checkAnswer'))
 //To remove a point
 app.post('/api/removePoint', require('./controllers/removePoint'))
 
+//Changing the streak to zero
+app.post('/api/streakToZero', require('./controllers/streakToZero'))
+
 //Get logged user
 app.get('/api/me', require('./controllers/get_me'))
 

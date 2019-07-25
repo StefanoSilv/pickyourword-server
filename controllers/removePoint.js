@@ -12,6 +12,7 @@ module.exports = (req, res) => {
 				console.log(decoded);
 				//find the user by id after the decoding of the token
 				db_user.findById(decoded._id).then((user) => {
+					user.streak = 0
 					if(user.points>0){
 						user.points -= 1
 					}else{
