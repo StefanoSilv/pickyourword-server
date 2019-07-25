@@ -38,6 +38,8 @@ app.post('/api/signup', require('./controllers/signup'))
 //Login
 app.post('/api/login', require('./controllers/login'))
 
+//Pay
+
 
 
 
