@@ -1,11 +1,12 @@
 const db_user = require('../models/user')
+const db_guest = require('../models/guest')
 const jwt = require('jsonwebtoken')
 const axios = require('axios')
 
 module.exports = (req, res) => {
-	let token = req.headers.authorization.split(' ')[1]
-	//for logged users
-	if (token) {
+	if(req.headers.authorization){
+		let token = req.headers.authorization.split(' ')[1]
+		//for logged users
 		//verify the user
 		jwt.verify(token, process.env.SECRET, (err, decoded) => {
 			if(decoded) {
@@ -29,9 +30,9 @@ module.exports = (req, res) => {
 			}
 		})
 	}else{ //If there is no token
-		console.log('req.body' , req.body)
-		if(req.body._id){ //if the user is already playing, there must be an id
-			db_guest.findById(req.body._id).then( (guest) => {
+		if(req.body.guest._id){ //if the user is already playing, there must be an id
+			db_guest.findById(req.body.guest._id).then( (guest) => {
+				console.log(guest);
 				guest.streak = 0
 				if(guest.points > 0){
 					guest.points -= 1
