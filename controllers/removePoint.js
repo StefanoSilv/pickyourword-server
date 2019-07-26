@@ -10,7 +10,6 @@ module.exports = (req, res) => {
 		//verify the user
 		jwt.verify(token, process.env.SECRET, (err, decoded) => {
 			if(decoded) {
-				console.log(decoded);
 				//find the user by id after the decoding of the token
 				db_user.findById(decoded._id).then((user) => {
 					user.streak = 0
@@ -32,7 +31,6 @@ module.exports = (req, res) => {
 	}else{ //If there is no token
 		if(req.body.guest._id){ //if the user is already playing, there must be an id
 			db_guest.findById(req.body.guest._id).then( (guest) => {
-				console.log('guest',guest);
 				guest.streak = 0
 				if(guest.points > 0){
 					guest.points -= 1
@@ -40,7 +38,6 @@ module.exports = (req, res) => {
 					guest.points = 0
 				}
 				db_guest.findByIdAndUpdate(guest._id, guest, {new: true}).then( (g) => {
-					console.log('g',g);
 					res.json(g)
 				})
 			}).catch( (err) => {

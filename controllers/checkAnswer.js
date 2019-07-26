@@ -12,7 +12,6 @@ module.exports = (req, res) => {
 		let correct_answers = answers.data.map( (c) => c.word )
 		let correct_answer = correct_answers.find( (element) => {
 			return element === answer
-			console.log(element);
 		})
 
 		//points added is working
@@ -57,7 +56,6 @@ module.exports = (req, res) => {
 				}
 			})
 		}else{
-			console.log('req.body',req.body);
 			//If there is no token
 			//If there is an id
 			if(req.body.guest._id){
@@ -78,7 +76,6 @@ module.exports = (req, res) => {
 							}
 						}
 						db_guest.findByIdAndUpdate(guest._id, guest, { new: true }).then( (g) =>{
-							console.log(g);
 							res.json( g )
 						}).catch( (err) => {
 							console.log(err);
@@ -106,7 +103,6 @@ module.exports = (req, res) => {
 				})
 
 				new_guest.save().then( (guest) => { // send to client)
-					console.log(guest);
 					res.json(guest)
 				}).catch( (err) => {
 					console.log(err);

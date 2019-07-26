@@ -30,11 +30,12 @@ module.exports = (req, res) => {
 			db_guest.findById(req.body.guest._id).then( (guest) => {
 				console.log(guest);
 				guest.streak = 0
-				if(guest.points > 0){
-					guest.points -= 1
-				}else{
-					guest.points = 0
-				}
+				db_guest.findByIdAndUpdate(guest._id, guest, {new: true}).then( (g) => {
+					console.log('g',g);
+					res.json(g)
+				}).catch( (err) => {
+					console.log(err);
+				})
 			}).catch( (err) => {
 				console.log(err);
 			})
