@@ -14,6 +14,7 @@ module.exports = (req, res) => {
 					user.streak = 0
 					db_user.findByIdAndUpdate(decoded._id, user, {new: true}).then( (u) => {
 						res.json( u )
+						console.log('user', u);
 					}).catch( (err) => {
 						console.log(err);
 					})

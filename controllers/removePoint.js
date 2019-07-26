@@ -28,7 +28,29 @@ module.exports = (req, res) => {
 				})
 			}
 		})
-	}else{ //if user not logged
-		console.log('hello');
+	}else{ //If there is no token
+		console.log('req.body' , req.body)
+		if(req.body._id){ //if the user is already playing, there must be an id
+			db_guest.findById(req.body._id).then( (guest) => {
+				guest.streak = 0
+				if(guest.points > 0){
+					guest.points -= 1
+				}else{
+					guest.points = 0
+				}
+			}).catch( (err) => {
+				console.log(err);
+			})
+		}else{ //if the user is not already playing, a guest in the db must be created
+			db_guest.create({
+				rounds: 0,
+				points: 0,
+				streak:0
+			}).then( (guest) => {
+				res.json(guest)
+			}).catch( (err) => {
+				console.log(err);
+			})
+		}
 	}
 }
