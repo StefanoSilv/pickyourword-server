@@ -25,13 +25,15 @@ module.exports = (req, res) => {
 			}
 		})
 	}else{ //if user not logged
-		console.log('req.body.guest' , req.body.guest)
 		if(req.body.guest._id){ //if the user is already playing, there must be an id
+			// db_guest.findByIdAndUpdate(guest._id, {streak: 0}, {new: true}).then( (g) => {
+			// 	res.json(g)
+			// }).catch((err) => {
+			// 	console.log(err);
+			// })
 			db_guest.findById(req.body.guest._id).then( (guest) => {
-				console.log(guest);
 				guest.streak = 0
 				db_guest.findByIdAndUpdate(guest._id, guest, {new: true}).then( (g) => {
-					console.log('g',g);
 					res.json(g)
 				}).catch( (err) => {
 					console.log(err);
