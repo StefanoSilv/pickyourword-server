@@ -16,22 +16,17 @@ module.exports = (req, res) => {
 				db_user.findById(decoded._id).then( (user) => {
 					user.user_type = 'premium'
 					db_user.findByIdAndUpdate(decoded._id, user, {new: true}).then( (u) => {
-						console.log(typeof(data));
-						console.log(typeof(u));
-						console.log('user',u);
 						res.status(200).json({
 							user: u,
 							stripe: data
 						})
 					})
 				}).catch((err) => {
-					console.log(err);
-					// res.send(err)
+					res.send(err)
 				})
 			}
 		})
 	}).catch((err) => {
-		console.log('err', err)
 		res.send(err)
 	})
 }
