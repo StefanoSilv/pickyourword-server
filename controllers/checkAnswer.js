@@ -23,7 +23,8 @@ module.exports = (req, res) => {
 				if(decoded) {
 					// find user
 					db_user.findById(decoded._id).then((user) => {
-						if (user.rounds < 2000){
+						console.log(user);
+						if (user.rounds < 1000 || user.user_type=='premium'){
 							user.rounds++
 							//It is working until here
 							if(correct_answer) {
@@ -89,7 +90,6 @@ module.exports = (req, res) => {
 					console.log(err);
 				})
 			}else{ //If there is no id
-				console.log('no id guest');
 				let streak_guest = 0
 				let points_guest = 0
 				if(correct_answer) {
