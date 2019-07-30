@@ -28,7 +28,7 @@ const db_user = db.model('users', {
 	},
 	iscription_date:{
 		type: Date,
-		default: Date.now()
+		default: Date.now
 	},
 	streak: {
 		type: Number,
