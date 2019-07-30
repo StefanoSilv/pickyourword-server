@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 module.exports = (req, res) => {
+	console.log(req.body);
 	//Check if the name is already present in the database
 	db_user.findOne({name : req.body.name}).then( (user_n) => {
 		if(user_n){ //If it is:error

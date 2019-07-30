@@ -48,7 +48,8 @@ module.exports = (req, res) => {
 								res.json( u )
 							})
 						}else{
-							window.location.href = `${process.env.REACT_URL}pay`
+							// window.location.href = `${process.env.REACT_URL}pay` window not defined
+							// res.redirect(`${process.env.REACT_URL}signup`)
 						}
 					}).catch( (err) =>{
 						console.log(err);
@@ -81,12 +82,14 @@ module.exports = (req, res) => {
 							console.log(err);
 						})
 					}else{
-						window.location.href = `${process.env.REACT_URL}signup`
+						// window.location.href = `${process.env.REACT_URL}signup`
+						// res.redirect(`${process.env.REACT_URL}signup`);
 					}
 				}).catch( (err) => {
 					console.log(err);
 				})
 			}else{ //If there is no id
+				console.log('no id guest');
 				let streak_guest = 0
 				let points_guest = 0
 				if(correct_answer) {
