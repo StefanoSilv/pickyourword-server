@@ -23,7 +23,6 @@ module.exports = (req, res) => {
 				if(decoded) {
 					// find user
 					db_user.findById(decoded._id).then((user) => {
-						console.log(user);
 						if (user.rounds < 1000 || user.user_type=='premium'){
 							user.rounds++
 							//It is working until here
@@ -49,8 +48,7 @@ module.exports = (req, res) => {
 								res.json( u )
 							})
 						}else{
-							// window.location.href = `${process.env.REACT_URL}pay` window not defined
-							// res.redirect(`${process.env.REACT_URL}signup`)
+							res.send({success:false})
 						}
 					}).catch( (err) =>{
 						console.log(err);
