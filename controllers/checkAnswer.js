@@ -81,10 +81,10 @@ module.exports = (req, res) => {
 							res.json( g )
 						}).catch( (err) => {
 							console.log(err);
+							res.send(err)
 						})
 					}else{
-						// window.location.href = `${process.env.REACT_URL}signup`
-						// res.redirect(`${process.env.REACT_URL}signup`);
+						res.send({success:false})
 					}
 				}).catch( (err) => {
 					console.log(err);
