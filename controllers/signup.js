@@ -3,7 +3,6 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 module.exports = (req, res) => {
-	console.log(req.body);
 	if (req.body.name && req.body.email && req.body.password
 		&& req.body.name.length && req.body.email.length &&
 		req.body.password.length){
@@ -48,6 +47,5 @@ module.exports = (req, res) => {
 		})
 	}else{
 		res.send('All the field must be filled')
-		console.log(res);
 	}
 }
