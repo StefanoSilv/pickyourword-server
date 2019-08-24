@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 module.exports = (req, res) => {
+	console.log(req);
 	// 1. Check if email exists in db
 	db_user.findOne({email: req.body.email}).then( (user) => {
 		if (user) {
@@ -11,6 +12,7 @@ module.exports = (req, res) => {
 				if (match) {
 					// 4. If passwords match, res OK
 					let token = jwt.sign(user.toObject(), process.env.SECRET)
+					console.log('token', token);
 					res.status(200).json({
 						message: 'You are logged in',
 						token: token
